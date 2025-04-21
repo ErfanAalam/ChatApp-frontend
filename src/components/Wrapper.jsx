@@ -212,8 +212,8 @@ const Wrapper = () => {
         </button>
       </header>
 
-      <main className="mt-14">
-        <div className="">
+      <main className="">
+        <div className="mt-14">
           <Routes>
             <Route path="/" element={<Register />} />
             <Route path="/login" element={<Login />} />
