@@ -212,7 +212,7 @@ const Wrapper = () => {
         </button>
       </header>
 
-      <main className="">
+      <main className="mt-14">
         <div className="">
           <Routes>
             <Route path="/" element={<Register />} />
