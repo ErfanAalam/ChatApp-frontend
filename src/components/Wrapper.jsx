@@ -4,10 +4,11 @@ import Login from "../Auth/Login";
 import Register from "../Auth/Register";
 import App from "../App";
 import Cookies from "js-cookie";
-import LogoutIcon from "@mui/icons-material/Logout";
+// import LogoutIcon from "@mui/icons-material/Logout";
 import UseSocket from "./UseSocket";
 import { UserContext } from "../context/UserContext";
 import UserProfile from "./home/UserProfile";
+import {LogOutIcon} from "lucide-react"
 
 
 const Wrapper = () => {
@@ -194,28 +195,25 @@ const Wrapper = () => {
       }}
     >
       
-      <header className="p-3 sm:p-4 bg-[#3A7D44] text-white flex flex-wrap justify-between items-center shadow-lg">
+     <div className="relative">
+     <header className="p-3 sm:p-4 absolute w-full bg-purple-800 text-white flex flex-wrap justify-between items-center shadow-lg">
         <div className="flex items-center gap-2 sm:gap-4">
-          {/* <div
-            className="profileImage w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cover bg-center border-2 border-white shadow-md transition-transform hover:scale-105"
-            style={user.profileImage ? { backgroundImage: `url(${user.profileImage})` } : { backgroundImage: `url("unknown-person-icon.webp")` }}
-          ></div> */}
           <UserProfile user={user} />
           <h1 className="text-base sm:text-lg md:text-2xl font-bold text-center">
             Welcome, <span className="text-yellow-200">{user.username}</span>
           </h1>
         </div>
         <button
-          className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm md:text-lg font-semibold bg-red-500 px-2 sm:px-3 py-1.5 sm:py-2 rounded-full hover:bg-red-600 transition-all duration-300 hover:shadow-lg active:scale-95"
+          className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm md:text-lg font-semibold bg-purple-500 px-2 sm:px-3 py-1.5 sm:py-2 rounded-full hover:bg-indigo-600 transition-all duration-300 hover:shadow-lg active:scale-95"
           onClick={(e) => handleLogout(e)}
         >
           <span className="hidden sm:inline-block">Logout</span>
-          <LogoutIcon className="w-5 h-5 sm:w-6 sm:h-6"/>
+          <LogOutIcon/>
         </button>
       </header>
 
       <main className="">
-        <div className=" mx-auto py-6 px-4">
+        <div className="">
           <Routes>
             <Route path="/" element={<Register />} />
             <Route path="/login" element={<Login />} />
@@ -223,6 +221,7 @@ const Wrapper = () => {
           </Routes>
         </div>
       </main>
+     </div>
     </UserContext.Provider>
   );
 };

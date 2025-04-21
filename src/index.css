@@ -75,7 +75,8 @@ button:focus-visible {
 
 body{
   /* background-color: rgb(65, 10, 82); */
-  background-color: #9DC08B;
+  /* background-color: #9DC08B; */
+  /* background: linear-gradient(45deg ,rgb(123, 23, 194),rgb(155, 35, 155),indigo) */
 }
 
 
