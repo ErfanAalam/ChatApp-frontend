@@ -146,7 +146,7 @@ const Right = () => {
     }
   };
   return (
-    <div className="flex flex-col h-[calc(100vh-240px)] bg-[#F8F5E9] rounded-xl shadow-lg p-4 md:p-6">
+    <div className="flex flex-col h-[calc(100vh-240px)] bg-gradient-to-br from-indigo-900 via-purple-800 to-indigo-700 rounded-xl shadow-lg p-4 md:p-6">
     <div className="flex items-center justify-between mb-4">
       <div className="flex items-center gap-3">
         <UserProfile user={recipient} />

@@ -196,7 +196,7 @@ const Wrapper = () => {
     >
       
      <div className="relative">
-     <header className="p-3 sm:p-4 absolute w-full bg-purple-800 text-white flex flex-wrap justify-between items-center shadow-lg">
+     <header className="p-3 sm:p-4  w-full bg-purple-800 text-white flex flex-wrap justify-between items-center shadow-lg">
         <div className="flex items-center gap-2 sm:gap-4">
           <UserProfile user={user} />
           <h1 className="text-base sm:text-lg md:text-2xl font-bold text-center">
@@ -213,7 +213,7 @@ const Wrapper = () => {
       </header>
 
       <main className="">
-        <div className="mt-14">
+        <div className="">
           <Routes>
             <Route path="/" element={<Register />} />
             <Route path="/login" element={<Login />} />

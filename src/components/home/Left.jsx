@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 import Right from "./Right";
 import MenuIcon from "@mui/icons-material/Menu";
+import { CrossIcon, X } from "lucide-react";
 
 const Left = () => {
   const {
@@ -19,20 +20,20 @@ const Left = () => {
   const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
   return (
-    <div className="flex min-h-[75vh] relative">
+    <div className="flex min-h-[75vh] relative ">
     {toggle ? (
-      <div className="fixed top-0 left-0 z-50 w-[85vw] h-screen md:w-[300px] md:h-auto md:absolute md:left-[-15px] p-4 bg-[#9DC08B] rounded-lg shadow-lg overflow-y-auto transition-transform duration-300 ease-in-out transform translate-x-0 scrollbar-hide">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-gray-800">Available Users</h2>
+      <div className="fixed top-18 md:0 left-0 z-50 w-[85vw] md:w-[300px]  md:absolute md:left-[-15px] p-4 bg-gradient-to-br from-indigo-900 via-purple-800 to-indigo-700 rounded-none shadow-lg overflow-y-auto transition-transform duration-300 ease-in-out transform translate-x-0 scrollbar-hide">
+        <div className="flex items-center justify-between mb-6 abso">
+          <h2 className="text-xl font-bold text-white">Available Users</h2>
           <button
             onClick={() => setToggle(false)}
-            className="text-gray-700 hover:text-gray-900 md:hidden"
+            className="text-gray-700 hover:text-gray-900"
             aria-label="Close users list"
           >
-            <MenuIcon />
+            <X/>
           </button>
         </div>
-        <ul className="space-y-3">
+        <ul className="space-y-4">
           {users
             .filter((person) => person._id !== user._id)
             .map((person) => (
@@ -79,14 +80,14 @@ const Left = () => {
     ) : (
       <button
         onClick={() => setToggle(true)}
-        className="fixed top-16 left-0 z-50 p-2 bg-[#9DC08B] rounded-r-md shadow-md hover:bg-[#8ab077] transition"
+        className="fixed top-16 md:top-24 left-0 z-50 p-2 bg-[#5e1caa] rounded-r-md shadow-md hover:bg-[#6f3fa7] transition"
         aria-label="Open users list"
       >
         <MenuIcon className="text-white" />
       </button>
     )}
 
-    <div className="w-full p-4 md:p-6">
+    <div className="w-full p-4 md:p-6 ">
       {selecteduser ? (
         <Right />
       ) : (
