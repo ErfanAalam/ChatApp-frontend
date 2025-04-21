@@ -146,98 +146,81 @@ const Right = () => {
     }
   };
   return (
-    <div className="max-w-4xl mx-auto h-[calc(100vh-240px)] flex flex-col bg-[#F8F5E9] shadow-lg rounded-xl p-4 sm:p-6">
-      <div className="flex justify-between items-center mb-4 px-2">
-        <div className="flex items-center gap-3">
-          {/* <div
-            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cover bg-center border-2 border-green-500"
-            style={
-              recipient.profileImage
-                ? { backgroundImage: `url(${recipient.profileImage})` }
-                : { backgroundImage: `url("/unknown-person-icon.webp")` }
-            }
-          /> */}
-          <UserProfile user={recipient} />
-          <div>
-            <h2 className="text-lg sm:text-xl font-bold text-gray-800">
-              {recipient.username.split(' ')[0]}
-            </h2>
-            <span className={`text-sm ${OnlineUsersId.includes(recipient?._id?.toString()) ? "text-green-600" : "text-gray-400"}`}>
-              {OnlineUsersId.includes(recipient?._id?.toString()) ? "Online" : "Offline"}
+    <div className="flex flex-col h-[calc(100vh-240px)] bg-[#F8F5E9] rounded-xl shadow-lg p-4 md:p-6">
+    <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center gap-3">
+        <UserProfile user={recipient} />
+        <div>
+          <h2 className="text-lg font-semibold text-gray-800">
+            {recipient.username.split(" ")[0]}
+          </h2>
+          <span
+            className={`text-sm ${
+              OnlineUsersId.includes(recipient?._id?.toString())
+                ? "text-green-600"
+                : "text-gray-400"
+            }`}
+          >
+            {OnlineUsersId.includes(recipient?._id?.toString())
+              ? "Online"
+              : "Offline"}
+          </span>
+        </div>
+      </div>
+      <button
+        className="px-4 py-1.5 bg-red-500 text-white text-sm rounded-full font-medium shadow hover:bg-red-600 transition"
+        onClick={() => clearMessages(recipient._id)}
+      >
+        Clear Chat
+      </button>
+    </div>
+
+    <div className="messages flex-1 overflow-y-auto bg-white/60 p-4 rounded-xl mb-4 space-y-3">
+      {messages.map((msg, idx) => (
+        <div key={idx} className={`flex ${msg.isIncoming ? "justify-start" : "justify-end"}`}>
+          <div
+            className={`px-4 py-2 rounded-2xl shadow-md max-w-[75%] ${
+              msg.isIncoming
+                ? "bg-green-500 text-white rounded-bl-none"
+                : "bg-blue-500 text-white rounded-br-none"
+            }`}
+          >
+            <p className="text-sm break-words">{msg.message}</p>
+            <span className="text-xs block mt-1 opacity-75">
+              {msg.timestamp
+                ? new Date(msg.timestamp).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })
+                : ""}
             </span>
           </div>
         </div>
-
-        <button
-          className="px-3 py-1.5 text-sm bg-red-500 text-white font-semibold rounded-full hover:bg-red-600 transition-colors duration-200 shadow-md hover:shadow-lg active:scale-95"
-          onClick={() => clearMessages(recipient._id)}
-        >
-          Clear Chat
-        </button>
-      </div>
-
-      <div
-        className="flex-1 mb-4 overflow-y-auto scrollbar-hide scroll-smooth bg-white/50 rounded-xl p-4"
-        aria-live="polite"
-      >
-        <div className="flex flex-col space-y-3">
-          {messages.map((msg, idx) => (
-            <div
-              key={idx}
-              className={`flex ${
-                msg.isIncoming ? "justify-start" : "justify-end"
-              }`}
-            >
-              <div
-                className={`max-w-[75%] px-4 py-2 rounded-2xl shadow-md
-                  ${
-                    msg.isIncoming
-                      ? "bg-green-500 text-white rounded-bl-none"
-                      : "bg-blue-500 text-white rounded-br-none"
-                  }`}
-              >
-                <p className="text-sm sm:text-base break-words">
-                  {msg.message}
-                </p>
-                <span className="text-xs opacity-75 mt-1 block">
-                  {msg.timestamp ? new Date(msg.timestamp).toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  }) : ""}
-                </span>
-              </div>
-            </div>
-          ))}
-          <div ref={messageRef} />
-        </div>
-      </div>
-
-      <div className="bg-white rounded-xl p-3 shadow-md">
-        <form
-          onSubmit={(e) => {
-            newMessage.length > 0 ? sendMessage(e) : e.preventDefault();
-          }}
-          className="flex items-center gap-3"
-        >
-          <input
-            type="text"
-            placeholder="Type your message..."
-            className="flex-1 px-4 py-2 text-gray-700 bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-200"
-            value={newMessage}
-            autoFocus={true}
-            onChange={(e) => setNewMessage(e.target.value)}
-          />
-          <button
-            type="submit"
-            className="p-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors duration-200 shadow-md hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
-            disabled={!newMessage.length}
-          >
-            <SendIcon className="w-5 h-5" />
-          </button>
-        </form>
-      </div>
+      ))}
+      <div ref={messageRef} />
     </div>
-  );
-};
 
+    <form
+      onSubmit={(e) => (newMessage.length > 0 ? sendMessage(e) : e.preventDefault())}
+      className="flex items-center gap-3 bg-white p-3 rounded-xl shadow"
+    >
+      <input
+        type="text"
+        placeholder="Type your message..."
+        value={newMessage}
+        onChange={(e) => setNewMessage(e.target.value)}
+        autoFocus
+        className="flex-1 px-4 py-2 bg-gray-100 text-gray-700 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+      />
+      <button
+        type="submit"
+        disabled={!newMessage.length}
+        className="p-3 bg-blue-500 text-white rounded-full shadow hover:bg-blue-600 transition active:scale-95 disabled:opacity-50"
+      >
+        <SendIcon className="w-5 h-5" />
+      </button>
+    </form>
+  </div>
+);
+};
 export default Right;
